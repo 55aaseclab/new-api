@@ -2976,7 +2976,7 @@
     "footer.columns.related.links.oneApi": "One API",
     "footer.columns.related.title": "相关项目",
     "footer.defaultCopyright": "版权所有。",
-    "footer.new\u0061pi.projectAttributionSuffix": "版权所有，由项目贡献者设计与开发。",
+    "footer.newapi.projectAttributionSuffix": "版权所有，由项目贡献者设计与开发。",
     "For a stronger password": "让密码更强",
     "For advanced custom channels this applies only to /v1/responses routes without protocol conversion.": "高级自定义渠道仅对 /v1/responses 且不做协议转换的路由生效。",
     "For channels added after May 10, 2025, no need to remove \".\" from model names during deployment": "对于 2025 年 5 月 10 日之后添加的渠道，在部署时无需从模型名称中移除 \".\"",
@@ -6391,7 +6391,6 @@
     "Supported variables": "支持变量",
     "Supports `-thinking`, `-thinking-": "支持 `-thinking`、`-thinking-`",
     "Supports HTML markup or iframe embedding. Enter HTML code directly, or provide a complete URL to automatically embed it as an iframe.": "支持 HTML 标记或 iframe 嵌入。直接输入 HTML 代码，或提供完整的 URL 以将其自动嵌入为 iframe。",
-    "Supports one-click configuration and perfectly adapts to NewAPI multi-protocol configuration.": "支持一键配置并完美适配 NewAPI 多协议配置",
     "Supports plugin extensions": "支持插件扩展",
     "Supports PNG, JPG, SVG, or WebP. Recommended size: 128×128 or smaller.": "支持 PNG、JPG、SVG 或 WebP，建议尺寸不超过 128×128。",
     "Surprise me": "给我惊喜",
@@ -7781,6 +7780,7 @@
     "Zhipu": "智谱",
     "Zhipu GLM": "智谱GLM",
     "Zhipu V4": "智谱 V4",
-    "Zoom": "缩放"
+    "Zoom": "缩放",
+    "Works with Codex, OpenCode and WorkBuddy. Full setup guides in the docs.": "支持 Codex / OpenCode / WorkBuddy，完整配置教程见文档。"
   }
 }

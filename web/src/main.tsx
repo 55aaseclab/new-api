@@ -71,21 +71,20 @@ if (!rootElement) {
 ;(function initSystemBranding() {
   try {
     if (typeof window === 'undefined' || typeof document === 'undefined') return
-    // PATCH(55AA): tab 标题固定为产品在前（与管理台品牌名解耦），与 docs 站（文档 · 55AA 安全实验室）区分
-    const applyTitle = () => {
+    // PATCH(55AA): tab 标题按语言取配置（SystemNameZh/SystemName，管理台可改），与 docs 站区分
+    const apply = (name: string, nameZh?: string) => {
       const isZh = (localStorage.getItem('i18nextLng') || 'zh').startsWith('zh')
-      const title = isZh
-        ? 'LLM 网关 · 55AA 安全实验室'
-        : 'LLM Gateway · 55AA Security Lab'
+      const title = isZh ? (nameZh || name) : name
       document.title = title
       const metaTitle = document.querySelector(
         'meta[name="title"]'
       ) as HTMLMetaElement | null
       if (metaTitle) metaTitle.setAttribute('content', title)
     }
-    applyTitle()
     // Cache-first
     const cached = readCachedStatus()
+    if (cached?.system_name)
+      apply(cached.system_name as string, cached.system_name_zh as string | undefined)
     if (cached?.logo) applyFaviconToDom(cached.logo as string)
 
     // Background refresh through the shared cache. This primes ['status']
@@ -94,8 +93,10 @@ if (!rootElement) {
     // localStorage write and the system-config store sync.
     queryClient
       .ensureQueryData(statusQueryOptions)
-      .then(() => {
-        applyTitle()
+      .then((s) => {
+        if (s?.system_name)
+          apply(s.system_name as string, s.system_name_zh as string | undefined)
+        if (s?.logo) applyFaviconToDom(s.logo as string)
       })
       .catch(() => {
         /* empty */
