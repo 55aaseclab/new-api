@@ -48,6 +48,7 @@ import { isValidTaskPublicAddress } from './task-public-address'
 
 const _systemInfoSchema = z.object({
   SystemName: z.string().min(1),
+  SystemNameZh: z.string().optional(),
   ServerAddress: z.string().optional(),
   TaskPublicAddress: z.string().refine(isValidTaskPublicAddress),
   Logo: z.string().url().optional().or(z.literal('')),
@@ -80,6 +81,7 @@ export function SystemInfoSection({ defaultValues }: SystemInfoSectionProps) {
 
   const normalizedDefaults: SystemInfoFormValues = {
     SystemName: normalizeValue(defaultValues.SystemName),
+    SystemNameZh: normalizeValue(defaultValues.SystemNameZh),
     ServerAddress: normalizeValue(defaultValues.ServerAddress),
     TaskPublicAddress: normalizeValue(defaultValues.TaskPublicAddress),
     Logo: normalizeValue(defaultValues.Logo),
@@ -99,6 +101,7 @@ export function SystemInfoSection({ defaultValues }: SystemInfoSectionProps) {
     SystemName: z.string().min(1, {
       error: () => t('System name is required'),
     }),
+    SystemNameZh: z.string().optional(),
     ServerAddress: z.string().optional(),
     TaskPublicAddress: z.string().refine(isValidTaskPublicAddress, {
       error: () =>
@@ -167,6 +170,23 @@ export function SystemInfoSection({ defaultValues }: SystemInfoSectionProps) {
                     </FormControl>
                     <FormDescription>
                       {t('The name displayed across the application')}
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name='SystemNameZh'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t('System Name (Chinese)')}</FormLabel>
+                    <FormControl>
+                      <Input placeholder='55AA 安全实验室 · LLM 网关' {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      {t('Shown when the interface language is Chinese')}
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
