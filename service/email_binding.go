@@ -45,6 +45,15 @@ func ValidateAccountEmail(email string) (string, error) {
 	if common.EmailDomainRestrictionEnabled {
 		allowed := slices.Contains(common.EmailDomainWhitelist, parts[1])
 		if !allowed {
+			// 通配符：白名单条目以 . 开头 = 后缀规则（匹配所有子域名）
+			for _, d := range common.EmailDomainWhitelist {
+				if strings.HasPrefix(d, ".") && strings.HasSuffix(parts[1], d) {
+					allowed = true
+					break
+				}
+			}
+		}
+		if !allowed {
 			return "", ErrAccountEmailRestricted
 		}
 	}
