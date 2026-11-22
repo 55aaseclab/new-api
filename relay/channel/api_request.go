@@ -60,6 +60,13 @@ func SetupApiRequestHeader(info *common.RelayInfo, c *gin.Context, req *http.Hea
 		if info.IsStream && c.Request.Header.Get("Accept") == "" {
 			req.Set("Accept", "text/event-stream")
 		}
+		// PATCH: forward client session headers for sticky account routing
+		// on downstream gateways (e.g. sub2api session affinity)
+		for _, h := range []string{"session_id", "originator"} {
+			if v := c.Request.Header.Get(h); v != "" {
+				req.Set(h, v)
+			}
+		}
 	}
 }
 
