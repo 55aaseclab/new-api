@@ -74,7 +74,7 @@ export function PublicHeader(props: PublicHeaderProps) {
     showNotifications = true,
   } = props
 
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const navigate = useNavigate()
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -85,6 +85,7 @@ export function PublicHeader(props: PublicHeaderProps) {
   const { auth } = useAuthStore()
   const {
     systemName,
+    systemNameZh,
     logo: systemLogo,
     loading,
     logoLoaded,
@@ -96,7 +97,7 @@ export function PublicHeader(props: PublicHeaderProps) {
 
   const user = auth.user
   const isAuthenticated = !!user
-  const displaySiteName = customSiteName || systemName
+  const displaySiteName = i18n.language?.startsWith('zh') ? (systemNameZh || customSiteName || systemName) : (customSiteName || systemName)
   const links = dynamicLinks.length > 0 ? dynamicLinks : navLinks
 
   let logoContent: ReactNode = (
@@ -224,7 +225,7 @@ export function PublicHeader(props: PublicHeaderProps) {
                   {logoContent}
                 </div>
                 <span
-                  className='max-w-48 truncate text-sm font-semibold tracking-tight'
+                  className='max-w-72 truncate text-sm font-semibold tracking-tight'
                   title={displaySiteName}
                 >
                   {loading ? (

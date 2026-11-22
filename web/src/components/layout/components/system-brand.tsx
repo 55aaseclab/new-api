@@ -46,12 +46,12 @@ type SystemBrandProps = {
  * - sidebar: stacked card in the sidebar header (display only)
  */
 export function SystemBrand(props: SystemBrandProps) {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const { status } = useStatus()
-  const { logo } = useSystemConfig()
+  const { logo, systemNameZh } = useSystemConfig()
 
   const variant = props.variant ?? 'sidebar'
-  const name = status?.system_name || props.defaultName || 'New API'
+  const name = i18n.language?.startsWith('zh') ? (systemNameZh || status?.system_name || props.defaultName || 'New API') : (status?.system_name || props.defaultName || 'New API')
   const version =
     status?.version || props.defaultVersion || t('Unknown version')
 
@@ -72,7 +72,7 @@ export function SystemBrand(props: SystemBrandProps) {
             className='size-full rounded-md object-cover'
           />
         </div>
-        <span className='max-w-[12rem] truncate'>{name}</span>
+        <span className='max-w-[22rem] truncate'>{name}</span>
       </Link>
     )
   }
@@ -93,7 +93,7 @@ export function SystemBrand(props: SystemBrandProps) {
             />
           </div>
           <div className='grid flex-1 text-start text-sm leading-tight group-data-[collapsible=icon]:hidden'>
-            <span className='truncate font-semibold'>{name}</span>
+            <span className='whitespace-normal break-words font-semibold'>{name}</span>
             <span className='truncate text-xs'>{version}</span>
           </div>
         </SidebarMenuButton>

@@ -18,6 +18,8 @@ For commercial licensing, please contact support@quantumnous.com
 */
 import { useTranslation } from 'react-i18next'
 
+import { useSystemConfig } from '@/hooks/use-system-config'
+
 import { Separator } from '@/components/ui/separator'
 
 import { getGatewayFeatures } from '../constants'
@@ -31,6 +33,9 @@ interface GatewayCardProps {
  * Central gateway card with features grid
  */
 export function GatewayCard({ logo, systemName }: GatewayCardProps) {
+  const { i18n } = useTranslation()
+  const { systemNameZh } = useSystemConfig()
+  const displayTitle = i18n.language?.startsWith('zh') ? (systemNameZh || systemName) : systemName
   const { t } = useTranslation()
   const features = getGatewayFeatures(t)
 
@@ -51,7 +56,7 @@ export function GatewayCard({ logo, systemName }: GatewayCardProps) {
             className='h-12 w-12 rounded-lg object-cover'
           />
           <h3 className='from-foreground to-foreground/70 bg-gradient-to-r bg-clip-text text-2xl font-bold text-transparent'>
-            {systemName}
+            {displayTitle}
           </h3>
         </div>
 
