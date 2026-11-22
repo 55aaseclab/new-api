@@ -31,6 +31,23 @@
         document.documentElement.classList.add(theme)
       })()
     </script>
+    <!-- PATCH(55AA): pre-paint title (locale + cached status) to avoid EN->ZH flash -->
+    <script>
+      ;(function () {
+        try {
+          var isZh = (localStorage.getItem('i18nextLng') || 'zh').indexOf('zh') === 0
+          var cached = JSON.parse(localStorage.getItem('status') || 'null')
+          var title = isZh
+            ? (cached && cached.system_name_zh) || cached && cached.system_name
+            : cached && cached.system_name
+          if (title) {
+            document.title = title
+            var metaTitle = document.querySelector('meta[name="title"]')
+            if (metaTitle) metaTitle.setAttribute('content', title)
+          }
+        } catch (e) {}
+      })()
+    </script>
     <!--umami-->
     <!--Google Analytics-->
   </head>
