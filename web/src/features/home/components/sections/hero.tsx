@@ -202,6 +202,19 @@ export function Hero(props: HeroProps) {
                 <img src='/icons/workbuddy.svg' alt='WorkBuddy' className='size-6 shrink-0 rounded-md object-contain' />
                 <span>WorkBuddy</span>
               </a>
+
+              {/* 更多工具 */}
+              <a
+                href={`${docsUrl}/${(i18n.language || 'zh').startsWith('zh') ? 'zh' : 'en'}/#connect`}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='group border-border/40 bg-muted/15 text-foreground/55 hover:border-border hover:bg-muted/30 hover:text-foreground flex items-center gap-2.5 rounded-full border px-5 py-2.5 text-sm font-medium shadow-[0_1px_2.5px_rgba(0,0,0,0.01)] backdrop-blur-xs transition-all duration-300 hover:scale-[1.02]'
+              >
+                <svg viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' className='size-5 shrink-0'>
+                  <circle cx='5' cy='12' r='1' /><circle cx='12' cy='12' r='1' /><circle cx='19' cy='12' r='1' />
+                </svg>
+                <span>{t('More Apps')}</span>
+              </a>
             </div>
           </div>
         </div>
