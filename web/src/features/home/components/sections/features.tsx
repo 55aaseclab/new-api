@@ -188,7 +188,6 @@ export function Features(_props: FeaturesProps) {
           </p>
           <h2 className='text-2xl leading-tight font-bold tracking-tight md:text-3xl'>
             {t('Built for developers,')}
-            <br />
             {t('designed for scale')}
           </h2>
         </AnimateInView>
